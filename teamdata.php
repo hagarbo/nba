@@ -18,7 +18,7 @@
 	foreach ($players as $key => $value) {
 		if (($count%$numColumns==0)||($count==0)) 
 			$echores = $echores . "<div id='team-row-" . intdiv($count,$numColumns)+1 . "' class='team-row'><!--FILA-->";
-		$echores = $echores . "<div id='player-data-" . $value['codigo'] . "' class='player-data' onclick='playerStats(this.id)'>
+		$echores = $echores . "<div id='player-data-" . $value['codigo'] . "' class='player-data " . $_GET['team'] . "' onclick='playerStats(this.id)'>
 				<img src='img/blank.webp'/>
 				<h3>" . $value['Nombre'] ."</h3>
 				<div id='datos-basicos'>

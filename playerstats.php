@@ -14,29 +14,39 @@
 		//CONFIGURAMOS LA SALIDA
 		$tabHtml = "<div class='tab'>";
 		$divsHtml = "";
-		$count = 0;
-		foreach ($stats as $key => $value) {
-			$count++;
-			if ($count==1) {
-				$button_class_string = "'tablinks active'";
-				$style = "style='display:block;'";
+
+		if ($conn->affected_rows == 0) { // Si no hay resultados para el jugador
+			$divsHtml = "<div id='tab1' class='tabcontent' style='display:block;'>
+							<h2>No hay estadísticas del jugador:</h2>
+							<h2>" . $_GET['name'] . "</h2>
+						</div>";
+		}
+		else {
+			$count = 0;
+			foreach ($stats as $key => $value) {
+				$count++;
+				if ($count==1) {
+					$button_class_string = "'tablinks active'";
+					$style = "style='display:block;'";
+				}
+				else {
+					$button_class_string = "'tablinks'";
+					$style = "";
+				}
+				$tabHtml = $tabHtml . "<div class=" . $button_class_string . " onclick=\"openTab(event, 'tab" . $count ."')\">" . $value['temporada'] . "</div>";
+				$divsHtml = $divsHtml . "<div id='tab" . $count . "' class='tabcontent' " . $style . ">
+										<h3>" . $_GET['name'] . "</h3>
+										<p>Puntos por partido: " . $value['Puntos_por_partido'] . "</p>
+										<p>Asistencias por partido: " . $value['Asistencias_por_partido'] . "</p>
+										<p>Tapones por partido: " . $value['Tapones_por_partido'] . "</p>
+										<p>Rebotes por partido: " . $value['Rebotes_por_partido'] . "</p>
+										</div>";
 			}
-			else {
-				$button_class_string = "'tablinks'";
-				$style = "";
-			}
-			$tabHtml = $tabHtml . "<button class=" . $button_class_string . " onclick=\"openTab(event, 'tab" . $count ."')\">" . $value['temporada'] . "</button>";
-			$divsHtml = $divsHtml . "<div id='tab" . $count . "' class='tabcontent' " . $style . ">
-									<h3>" . $_GET['name'] . "</h3>
-									<p>Puntos por partido: " . $value['Puntos_por_partido'] . "</p>
-									<p>Asistencias por partido: " . $value['Asistencias_por_partido'] . "</p>
-									<p>Tapones por partido: " . $value['Tapones_por_partido'] . "</p>
-									<p>Rebotes por partido: " . $value['Rebotes_por_partido'] . "</p>
-									</div>";
 		}
 		$tabHtml = $tabHtml . "</div><!-- class tab -->";
 
 		echo $tabHtml . $divsHtml;
+		$conn->close();
 	}
 
 	
