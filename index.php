@@ -17,21 +17,23 @@
 	<title>NBApedia</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/nba.js"></script>
 </head>
 <body>
 
 <?php
+	require('parts/header.php');
 	$westDiv ="";
 	$eastDiv ="";
 	foreach ($teams as $key => $value) {
 		if ($value['Conferencia'] == "West"){
-		    $westDiv = $westDiv . "<div class='team-card " . $value['Nombre'] . "' onclick=window.location=('http://nba.local/team.php?team=" . $value['Nombre'] ."')>
+		    $westDiv = $westDiv . "<div class='team-card' onclick=window.location=('http://nba.local/team.php?team=" . $value['Nombre'] ."')>
 		    				<img class='team-logo' src='img/" . $value['Logo'] ."'>"
 		    				/*<div class='team-name'>" . $value['Ciudad'] . " " . $value['Nombre'] . "</div>*/
 		    			. "</div>";
 		}
 		else {
-			$eastDiv = $eastDiv . "<div class='team-card " . $value['Nombre'] . "' onclick=window.location=('http://nba.local/team.php?team=" . $value['Nombre'] ."')>
+			$eastDiv = $eastDiv . "<div class='team-card' onclick=window.location=('http://nba.local/team.php?team=" . $value['Nombre'] ."')>
 		    				<img class='team-logo' src='img/" . $value['Logo'] . "'>"
 		    				/*<div class='team-name'>" . $value['Ciudad'] . " " . $value['Nombre'] . "</div>*/
 		    			. "</div>";

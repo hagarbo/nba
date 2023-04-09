@@ -16,17 +16,61 @@
 	$numColumns = 4; //COLUMNAS O FICHAS POR FILA
 	$echores = "";
 	foreach ($players as $key => $value) {
+
+		// Stats de la ultima temporada para cada jugador
+		$query = "SELECT * FROM estadisticas WHERE jugador=? AND temporada = '07/08'";
+		$stmt = $conn->prepare($query);
+		$stmt->bind_param('s',$value['codigo']);
+		$stmt->execute();
+		$resultSet = $stmt->get_result();
+		$stats = $resultSet->fetch_assoc();
+		
+		//Si hay stats de la ultima season
+		if ($conn->affected_rows != 0){
+			$flipboxbackcontent = "<h2>Last Season</h2>
+										<div class='last-season-stats'>
+											<div class='last-season-stats-row'>
+												<div class='last-season-stats-header'>
+													<p>Points</p>
+													<p>Assists</p>
+												</div>
+												<div class='last-season-stats-data'>
+													<p>" . $stats['Puntos_por_partido'] . "</p>
+													<p>" . $stats['Asistencias_por_partido'] . "</p>
+												</div>
+											</div>
+											<div class='last-season-stats-row'>
+												<div class='last-season-stats-header'>
+													<p>Rebounds</p>
+													<p>Blocks</p>
+												</div>
+												<div class='last-season-stats-data'>
+													<p>" . $stats['Rebotes_por_partido'] . "</p>
+													<p>" . $stats['Tapones_por_partido'] . "</p>
+												</div>
+											</div>
+										</div>";
+		}
+		else $flipboxbackcontent = "<h2>Last Season</h2><h1>NO DATA</h1>";
+
+		//Arranque de fila
 		if (($count%$numColumns==0)||($count==0)) 
 			$echores = $echores . "<div id='team-row-" . intdiv($count,$numColumns)+1 . "' class='team-row'><!--FILA-->";
-		$echores = $echores . "<div id='player-data-" . $value['codigo'] . "' class='player-data " . $_GET['team'] . "' onclick='playerStats(this.id)'>
-				<img src='img/blank.webp'/>
-				<h3>" . $value['Nombre'] ."</h3>
-				<div id='datos-basicos'>
-					<p>Position: <strong>" . $value['Posicion'] . "</strong></p>
-					<p>H: <strong>" . $value['Altura'] . "</strong></p>
-					<p>W: <strong>" . $value['Peso'] . "</strong></p>
+		$echores = $echores . "<div id='player-data-" . $value['codigo'] . "' class='flip-box player-data team-" . $_GET['team'] . "' onclick='playerStats(this.id)'>
+				<div class='flip-box-inner'>
+					<div class='flip-box-front'>
+						<img src='img/blank.webp'/>
+						<h3>" . $value['Nombre'] ."</h3>
+						<div id='datos-basicos'>
+							<p>Position:" . $value['Posicion'] . " </p>
+							<p>H:" . $value['Altura'] . " </p>
+							<p>W:" . $value['Peso'] . " </p>
+						</div>
+						<h4>" . $value['Procedencia'] . "</h4>
+					</div>
+					<div class='flip-box-back'>" . $flipboxbackcontent . "
+					</div>
 				</div>
-				<h4>" . $value['Procedencia'] . "</h4>
 			</div><!--FICHA-->";
 		$count++;
 		if ($count%$numColumns==0) $echores = $echores . "</div><!--FILA-->";

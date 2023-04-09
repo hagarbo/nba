@@ -15,23 +15,22 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>NBApedia</title>
+	<title>NBA Stats</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
 	<script src="js/nba.js"></script>
 </head>
 <body>
+	<?php require('parts/header.php'); ?>
 	<form action="">
 		<div id="team-selector">
-			<label for="selector">Equipo:</label>
+			<label for="selector">Pick a Team:</label>
 			<select name="selector" onchange="refresh(this.value)">
-				<option value="empty">Seleccione el equipo</option>
 				<?php foreach ($teams as $key => $value) {
 					echo "<option value='" . $value['Nombre'] . "'>" . $value['Nombre'] . "</option>";
 				}?>
 			</select>
 		</div>
-		<hr>
 		<div id="player-stats" class="stats">
 			
 		</div>

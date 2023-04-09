@@ -53,15 +53,26 @@ window.onscroll = function() {
 // Add the sticky class to the header when you reach its scroll position. 
 //Remove "sticky" when you leave the scroll position
 function stickyStats() {
-	if (document.getElementById("player-stats").innerHTML!=""){
+	if (document.getElementById("nav_menu").innerHTML!=""){
 		// Get the header
-		var header = document.getElementById("player-stats");
+		var header = document.getElementById("nav_menu");
 		// Get the offset position of the navbar
 		var sticky = header.offsetTop;
 		if (window.pageYOffset > sticky) {
 			header.classList.add("sticky");
 		} else {
 		    header.classList.remove("sticky");
+		}
+	}
+	if (document.getElementById("player-stats").innerHTML!=""){
+		// Get the stats div
+		var stats = document.getElementById("player-stats");
+		// Get the offset position of the box
+		var sticky = stats.offsetTop;
+		if (window.pageYOffset > sticky) {
+			stats.classList.add("sticky");
+		} else {
+		    stats.classList.remove("sticky");
 		}
 	}
 } 
