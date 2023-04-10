@@ -317,7 +317,7 @@ nav{
   text-align: center;
   border-radius: 100px;
   box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.2);
-  background-color: #bbb;
+  background-color: white;
 }
 
 #all-teams img{
@@ -325,10 +325,12 @@ nav{
   mix-blend-mode: multiply;
 }
 #east-header{
+  padding: 10px 0px 10px 0px;
   background-image: linear-gradient(to bottom right, #002B5C, #ED174C, #006BB6);
 }
 #west-header{
-  background-image: linear-gradient(to bottom right, #552583, #E56020, #006BB6);
+  padding: 10px 0px 10px 0px;
+  background-image: linear-gradient(to bottom right, #552583, dodgerblue, #006BB6);
 }
 .east,.west{
   max-width: 800px;
@@ -375,7 +377,7 @@ nav{
 }
 
 .team-Hornets {
-  background-color:#002b5c;
+  background-color:dodgerblue;
   background-image: url('../img/Hornets.gif');
   background-position: bottom;
   background-size: contain;
@@ -411,7 +413,7 @@ nav{
 }
 
 .team-Nuggets {
-  background-color:#0e2240;
+  background-color:dodgerblue;
   background-image: url('../img/Nuggets.gif');
   background-position: bottom;
   background-size: contain;
@@ -519,7 +521,7 @@ nav{
 }
 
 .team-Knicks {
-  background-color:#002b5c;
+  background-color:/*#002b5c*/indianred;
   background-image: url('../img/Knicks.gif');
   background-position: bottom;
   background-size: contain;
@@ -528,7 +530,7 @@ nav{
 }
 
 .team-Magic {
-  background-color:#002b5c;
+  background-color:dodgerblue;
   background-image: url('../img/Magic.gif');
   background-position: bottom;
   background-size: contain;
@@ -537,7 +539,7 @@ nav{
 }
 
 .team-76ers {
-  background-color:dodgerblue;
+  background-color:burlywood;
   background-image: url('../img/76ers.gif');
   background-position: bottom;
   background-size: contain;
@@ -591,7 +593,7 @@ nav{
 }
 
 .team-Jazz {
-  background-color:#002b5c;
+  background-color:indianred;
   background-image: url('../img/Jazz.gif');
   background-position: bottom;
   background-size: contain;
@@ -600,7 +602,7 @@ nav{
 }
 
 .team-Wizards {
-  background-color:#002b5c;
+  background-color:dodgerblue;
   background-image: url('../img/Wizards.gif');
   background-position: bottom;
   background-size: contain;
