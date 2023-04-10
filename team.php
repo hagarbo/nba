@@ -27,7 +27,7 @@
 			<label for="selector">Pick a Team:</label>
 			<select name="selector" onchange="refresh(this.value)">
 				<?php foreach ($teams as $key => $value) {
-					echo "<option value='" . $value['Nombre'] . "'>" . $value['Nombre'] . "</option>";
+					echo ($value['Nombre']!=$_GET['team']) ? "<option value='" . $value['Nombre'] . "'>" . $value['Nombre'] . "</option>" : "<option value='" . $value['Nombre'] . "' selected>" . $value['Nombre'] . "</option>";
 				}?>
 			</select>
 		</div>
@@ -37,7 +37,7 @@
 		<div id="team-frame">
 			<?php 
 				if (isset($_GET['team']))
-					echo "<script>refresh('" . $_GET['team'] . "');</script>"
+					echo "<script>refresh('" . $_GET['team'] . "');</script>";
 			?>
 		</div>
 	</form>
