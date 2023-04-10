@@ -23,6 +23,7 @@
 	$westHtml = $eastHtml = "<tr>
 		      					<th></th>
 		      					<th colspan='2' style='text-align:center;'>Team</th>
+		      					<th>Played</th>
 		      					<th>Wins</th>
 		        				<th>Loses</th>
 		      				</tr>";
@@ -34,6 +35,7 @@
   							<td>".$countWest."</td>
   							<td class='clickable' onclick=window.location=('http://nba.local/team.php?team=" . $value['equipo'] ."')><img src='img/".$value['equipo'].".gif'></td>
   							<td class='clickable' onclick=window.location=('http://nba.local/team.php?team=" . $value['equipo'] ."')>".$value['equipo']."</td>
+  							<td>".$value['victorias']+$value['derrotas']."</td>
   							<td>".$value['victorias']."</td>
   							<td>".$value['derrotas']."</td>
   						</tr>";
@@ -44,6 +46,7 @@
   							<td>".$countEast."</td>
   							<td class='clickable' onclick=window.location=('http://nba.local/team.php?team=" . $value['equipo'] ."')><img src='img/".$value['equipo'].".gif'></td>
   							<td class='clickable' onclick=window.location=('http://nba.local/team.php?team=" . $value['equipo'] ."')>".$value['equipo']."</td>
+  							<td>".$value['victorias']+$value['derrotas']."</td>
   							<td>".$value['victorias']."</td>
   							<td>".$value['derrotas']."</td>
   						</tr>";
@@ -60,119 +63,42 @@
 	<title>NBApedia</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/standings.css">
+	<script src="js/nba.js"></script>
 </head>
 <body>
 
 <?php require('parts/header.php');?>
-<style type="text/css">
-* {
-  box-sizing: border-box;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left:-5px;
-  margin-right:-5px;
-}
-
-.column {
-  flex: 50%;
-}
-
-h2{
-	background-color: dodgerblue;
-	color: white;
-	margin: 0;
-	padding: 10px;
-	border-top : 1px solid white;
-	border-bottom : 1px solid white;
-}
-
-table {
-	margin: auto;
-	border-collapse: collapse;
-	border-spacing: 0;
-	max-width: 800px;
-	border: 1px solid #ddd;
-}
-.clickable{
-	cursor: pointer;
-}
-.img-header{
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	margin: 10px;
-}
-.img-header img {
-	border-radius: 100px;
-	width: 128px;
-	margin: auto;
-}
-
-th,td {
-  text-align: left;
-  padding: 16px;
-}
-
-td img{
-	width: 64px;
-	filter: brightness(1.1);
- 	mix-blend-mode: multiply;
-}
-tr:nth-child(odd) {
-	background-color: #ccc;
-}
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-#seasons {
-	overflow: hidden;
-  	border: 1px solid #ccc;
-  	background-color: #f1f1f1;
-}
-#seasons .season-tab{
-	background-color: inherit;
-  	float: left;
-  	border: none;
-  	outline: none;
-  	cursor: pointer;
-  	padding: 14px 16px;
-  	transition: 0.3s;
-}
-#seasons .season-tab:hover{
-	background-color: #ddd;
-}
-#seasons .season-tab:active{
-	background-color: #ccc;
-}
-
-</style>
-</head>
-<body>
 
 <h2>STANDINGS</h2>
 <div id="seasons">
 		<?php 
 			foreach ($temporadas as $key => $value) {
-				echo ($value['temporada']==$season) ? "<div class='season-tab active'>".$value['temporada']."</div>" : "<div class='season-tab'>".$value['temporada']."</div>";
+				echo ($value['temporada']==$season) ? "<div class='season-tab active'>".$value['temporada']."</div>" : "<div class='season-tab' onclick=window.location=('http://nba.local/standings.php?season=" . $value['temporada'] ."')>".$value['temporada']."</div>";
 			}
 		?>
 	</div>
 </div>
 
 <div class="row">
-  <div class="column">
-  	<div class="img-header"><img src="img/west.gif"></div>
+  <div class="column west-table">
     <table>
-		<?php echo $westHtml;?>
+    	<thead>
+		    	<tr><th colspan="6"><img src="img/west.gif"></th></tr>
+		  </thead>
+		  <tbody>
+		  	<?php echo $westHtml;?>
+		  </tbody>
     </table>
   </div>
-  <div class="column">
-  	<div class="img-header"><img src="img/east.gif"></div>
+  <div class="column east-table">
     <table>
-	    <?php echo $eastHtml;?>
+	    <thead>
+		    	<tr><th colspan="6"><img width="128px" src="img/east.gif"></th></tr>
+		  </thead>
+		  <tbody>
+		  	<?php echo $eastHtml;?>
+		  </tbody>
     </table>
   </div>
 </div>
