@@ -18,7 +18,7 @@
 	<title>NBA Stats</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
-	<script src="js/nba.js"></script>
+	<script src="scripts/js/nba.js"></script>
 </head>
 <body>
 	<?php require('parts/header.php'); ?>

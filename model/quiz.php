@@ -1,9 +1,10 @@
 <?php
 
 class Quiz {
+	
 	private array $questions;
 
-	function __construct() {
+	public function __construct() {
 		
 	}
 

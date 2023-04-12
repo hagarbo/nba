@@ -17,7 +17,7 @@
 	<title>NBApedia</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script src="js/nba.js"></script>
+	<script src="scripts/js/nba.js"></script>
 </head>
 <body>
 
