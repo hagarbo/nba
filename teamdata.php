@@ -14,7 +14,7 @@
 
 	$count = 0;
 	$numColumns = 4; //COLUMNAS O FICHAS POR FILA
-	$echores = "";
+	$echores = "<div id='team-cards'>";
 	foreach ($players as $key => $value) {
 
 		// Stats de la ultima temporada para cada jugador
@@ -55,7 +55,7 @@
 
 		//Arranque de fila
 		if (($count%$numColumns==0)||($count==0)) 
-			$echores = $echores . "<div id='team-row-" . intdiv($count,$numColumns)+1 . "' class='team-row'><!--FILA-->";
+			$echores = $echores . "<div id='team-row-" . intdiv($count,$numColumns)+1 . "' class='team-row'>";
 		$echores = $echores . "<div id='player-data-" . $value['codigo'] . "' class='flip-box player-data team-" . $_GET['team'] . "' onclick='playerStats(this.id)'>
 				<div class='flip-box-inner'>
 					<div class='flip-box-front'>
@@ -73,12 +73,51 @@
 					<div class='flip-box-back'>" . $flipboxbackcontent . "
 					</div>
 				</div>
-			</div><!--FICHA-->";
+			</div>";
 		$count++;
-		if ($count%$numColumns==0) $echores = $echores . "</div><!--FILA-->";
+		if ($count%$numColumns==0) $echores = $echores . "</div>";
 	}
-	if ($count%$numColumns!=0) $echores = $echores . "</div><!--FILA-->";
-	echo $echores;
+	if ($count%$numColumns!=0) $echores = $echores . "</div></div>";
+	$courtHtml = "<div id='court'>
+					<img src='img/court.jpg'>";
+
+	$pos = ["<div class='pos-icon'><i class='fa-solid fa-user fa-2xl'></i></div><ul>",
+			"<div class='pos-icon'><i class='fa-solid fa-user fa-2xl'></i></div><ul>",
+			"<div class='pos-icon'><i class='fa-solid fa-user fa-2xl'></i></div><ul>",
+			"<div class='pos-icon'><i class='fa-solid fa-user fa-2xl'></i></div><ul>",
+			"<div class='pos-icon'><i class='fa-solid fa-user fa-2xl'></i></div><ul>"]; 
+	foreach ($players as $key => $value) {
+		switch ($value['Posicion']) {
+			case 'PG':
+				$pos[0].="<li>" . $value['Nombre'] . "</li>";
+				break;
+			case 'G':
+				$pos[1].="<li>" . $value['Nombre'] . "</li>";
+				break;
+			case 'G-F':
+				$pos[1].="<li>" . $value['Nombre'] . "</li>";
+				break;
+			case 'F':
+				$pos[2].="<li>" . $value['Nombre'] . "</li>";
+				break;
+			case 'C':
+				$pos[4].="<li>" . $value['Nombre'] . "</li>";
+				break;
+			case 'C-F':
+				$pos[4].="<li>" . $value['Nombre'] . "</li>";
+				break;	
+			default: // F-C
+				$pos[3].="<li>" . $value['Nombre'] . "</li>";
+				break;
+		}
+	}
+	
+	for ($i=0; $i < 5; $i++) {
+		$pos[$i].="</ul>";
+		$courtHtml.= "<div id='posicion-".($i+1)."' class='game-position'>".$pos[$i]."</div>";
+	}
+	$courtHtml.="</div>";
+	echo $echores.$courtHtml;
 	$conn->close();
 
 ?>

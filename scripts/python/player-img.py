@@ -17,7 +17,7 @@ result = cursor.fetchall()
 queryUpdate = "UPDATE jugadores SET nba_id = %s WHERE Nombre = %s"
 
 #UNCOMMENT BEFORE EXECUTION
-"""
+
 for i in result:
 	name = i[0]
 	player = players.find_players_by_full_name(name)
@@ -26,7 +26,3 @@ for i in result:
 		args = (nbaID, name)
 		cursor.execute(queryUpdate,args)
 		db.commit()
-"""
-
-player = players.find_players_by_full_name('Ron Artest III')
-print(player)
