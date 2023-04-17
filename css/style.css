@@ -197,12 +197,11 @@ nav{
 
 .player-data img {
   margin-top: 10px;
-  margin-left: 35px;
   max-width: 100%;
-  height: 190px;
 }
 
 .player-data object{
+  margin-top: 10px;
   width: 100%;
 }
 
@@ -644,6 +643,21 @@ nav{
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.game-position .showlist{
+  background-color: dodgerblue;
+  padding: 3px;
+}
+
+.game-position .showlist li{
+  display: block !important;
+}
+
+.game-position .showlist li:hover{
+  background-color: #04AA6D;
+  color: white;
+  cursor: pointer;
 }
 
 .game-position .pos-icon{

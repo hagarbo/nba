@@ -76,3 +76,22 @@ function stickyStats() {
 		}
 	}
 } 
+
+function onPlayerHover(elementId) {
+	document.getElementById(elementId).firstChild.firstChild.classList.add( "fa-beat-fade");
+	document.getElementById(elementId).childNodes[1].classList.add( "showlist");
+}
+
+function onPlayerOut(elementId) {
+	document.getElementById(elementId).firstChild.firstChild.classList.remove( "fa-beat-fade");
+	document.getElementById(elementId).childNodes[1].classList.remove( "showlist");
+}
+
+function onPlayerClick(elementId) {
+	for (i = 0; i < document.getElementById(elementId).parentNode.childElementCount; i++){
+		document.getElementById(elementId).parentNode.childNodes[i].style.display = "none";
+	}
+	document.getElementById(elementId).style.display = "block";
+	document.getElementById(elementId).parentNode.parentNode.firstChild.firstChild.classList.remove( "fa-beat-fade");
+	document.getElementById(elementId).parentNode.classList.remove( "showlist");
+}

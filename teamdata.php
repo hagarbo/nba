@@ -59,8 +59,8 @@
 		$echores = $echores . "<div id='player-data-" . $value['codigo'] . "' class='flip-box player-data team-" . $_GET['team'] . "' onclick='playerStats(this.id)'>
 				<div class='flip-box-inner'>
 					<div class='flip-box-front'>
-						<object data='https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/". $value['nba_id'] . ".png' type='image/png'>
-					      <img src='img/blank.webp'>
+						<object data='https://cdn.nba.com/headshots/nba/latest/260x190/". $value['nba_id'] . ".png' type='image/png'>
+					      <img src='img/fallback.png'>
 					    </object>
 						<h3>" . $value['Nombre'] ."</h3>
 						<div id='datos-basicos'>
@@ -89,32 +89,32 @@
 	foreach ($players as $key => $value) {
 		switch ($value['Posicion']) {
 			case 'PG':
-				$pos[0].="<li>" . $value['Nombre'] . "</li>";
+				$pos[0].="<li id='court-".$value['codigo']."' onclick=onPlayerClick(this.id)>" . $value['Nombre'] . "</li>";
 				break;
 			case 'G':
-				$pos[1].="<li>" . $value['Nombre'] . "</li>";
+				$pos[1].="<li id='court-".$value['codigo']."' onclick=onPlayerClick(this.id)>" . $value['Nombre'] . "</li>";
 				break;
 			case 'G-F':
-				$pos[1].="<li>" . $value['Nombre'] . "</li>";
+				$pos[1].="<li id='court-".$value['codigo']."' onclick=onPlayerClick(this.id)>" . $value['Nombre'] . "</li>";
 				break;
 			case 'F':
-				$pos[2].="<li>" . $value['Nombre'] . "</li>";
+				$pos[2].="<li id='court-".$value['codigo']."' onclick=onPlayerClick(this.id)>" . $value['Nombre'] . "</li>";
 				break;
 			case 'C':
-				$pos[4].="<li>" . $value['Nombre'] . "</li>";
+				$pos[4].="<li id='court-".$value['codigo']."' onclick=onPlayerClick(this.id)>" . $value['Nombre'] . "</li>";
 				break;
 			case 'C-F':
-				$pos[4].="<li>" . $value['Nombre'] . "</li>";
+				$pos[4].="<li id='court-".$value['codigo']."' onclick=onPlayerClick(this.id)>" . $value['Nombre'] . "</li>";
 				break;	
 			default: // F-C
-				$pos[3].="<li>" . $value['Nombre'] . "</li>";
+				$pos[3].="<li id='court-".$value['codigo']."' onclick=onPlayerClick(this.id)>" . $value['Nombre'] . "</li>";
 				break;
 		}
 	}
 	
 	for ($i=0; $i < 5; $i++) {
 		$pos[$i].="</ul>";
-		$courtHtml.= "<div id='posicion-".($i+1)."' class='game-position'>".$pos[$i]."</div>";
+		$courtHtml.= "<div id='posicion-".($i+1)."' class='game-position' onmouseover=onPlayerHover(this.id) onmouseout='onPlayerOut(this.id)'>".$pos[$i]."</div>";
 	}
 	$courtHtml.="</div>";
 	echo $echores.$courtHtml;
