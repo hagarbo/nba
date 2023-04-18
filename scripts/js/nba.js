@@ -107,6 +107,10 @@ function showPlayers(equipo){
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				const players = JSON.parse(this.responseText);
+					const opcion = crearNodo("option",{value:"empty"});
+					opcion.innerHTML = "";
+					document.getElementById("selector-player").appendChild(opcion);
+
 				for (let x in players) {
 					const opcion = document.createElement("option");
 					const value = document.createAttribute("value");
@@ -133,39 +137,65 @@ function showPlayerData(player){
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				const stats = JSON.parse(this.responseText);
-				
+				document.getElementById("player-info").style = "background-color: #ccc";
 				//FOTO Y NOMBRE EN UN DIV
-				fotoName = document.createElement("div");
-				fotoNameID = document.createAttribute("id");
-				fotoNameID.value = "foto-name";
-				fotoName.setAttributeNode(fotoNameID);
-				foto = document.createElement("img");
-				fotosrc = document.createAttribute("src");
-				fotosrc.value = "https://cdn.nba.com/headshots/nba/latest/260x190/"+stats[0].nba_id+".png";
-				fotoError = document.createAttribute("onerror");
-				fotoError.value="imgError(this)";
-				foto.setAttributeNode(fotosrc);
+				const fotoName = crearNodo("div",{id:"foto-name"});
+				const foto = crearNodo("img",{src:"https://cdn.nba.com/headshots/nba/latest/260x190/"+stats[0].nba_id+".png",
+										onerror:"imgError(this)"});
 				fotoName.appendChild(foto);
-				name = document.createElement("h2");
-				name.innerHTML = stats[0].Nombre;
-				fotoName.appendChild(name);
+				const nombre = crearNodo("h3",{onclick:"editarCelda(this)"});
+				nombre.innerHTML = stats[0].Nombre;
+				fotoName.appendChild(nombre);
 
 				//POSICION ALTURA PESO Y PROCEDENCIA EN OTRO DIV
-				datosBasicos = document.createElement("div");
-				datosBasicosID = document.createAttribute("id");
-				datosBasicosID.value = "datos-basicos";
-				datosBasicos.setAttributeNode(datosBasicosID);
-				altura = document.createElement("p");
-				
+				const datosBasicos = crearNodo("div",{id:"data-player"});
+				const posicion = document.createElement("div");
+				posicion.innerHTML = "<span>Position</span><p onclick='editarCelda(this)'>"+fullNamePosition(stats[0].Posicion)+"</p>";
+				const altura = document.createElement("div");
+				altura.innerHTML = "<span>Height</span><p onclick='editarCelda(this)'>"+stats[0].Altura+"<sup>\"</sup></p>";
+				const peso = document.createElement("div");
+				peso.innerHTML = "<span>Weight</span><p onclick='editarCelda(this)'>"+stats[0].Peso+"<sub>lb</sub></p>";
+				const procedencia = document.createElement("div");
+				procedencia.innerHTML = "<span>Origin</span><p onclick='editarCelda(this)'>"+stats[0].Procedencia+"</p>";
+				datosBasicos.appendChild(posicion);
+				datosBasicos.appendChild(altura);
+				datosBasicos.appendChild(peso);
+				datosBasicos.appendChild(procedencia);
 
 				document.getElementById("player-info").appendChild(fotoName);
+				document.getElementById("player-info").appendChild(datosBasicos);
 
-				console.log(stats[0]);
+				console.log(stats);
 			}
 		};
 		xmlhttp.open("GET","get-player-info.php?player="+player,true);
 		xmlhttp.send();
 	}
+}
+
+function fullNamePosition(pos){
+	switch(pos){
+	case 'PG':
+		return "Point Guard";
+	case 'G':
+		return "Guard";
+	case 'C':
+		return "Center";
+	case 'F':
+		return "Forward";
+	default:
+		return pos;
+	}
+}
+
+function crearNodo(tag,atributos){
+	nodo = document.createElement(tag);
+	for (key in atributos){
+		attr = document.createAttribute(key);
+		attr.value = atributos[key];
+		nodo.setAttributeNode(attr);
+	}
+	return nodo;
 }
 
 function imgError(img){
@@ -182,4 +212,9 @@ function loadSelectors(){
 	for (i = 1; i < select2.childNodes.length; i++){
 		select2.childNodes[i].remove();
 	}
+}
+
+
+function editarCelda(celda){
+	document.getElementById('edit-dialog').show;
 }
