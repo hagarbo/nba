@@ -57,11 +57,24 @@
 		display: none;
 	}
 	dialog{
+		display: block;
 		position: absolute;
+		left: 0;
+		right: 0;
+		margin: auto;
+		border-width: initial;
+		border-style: solid;
+		border-color: initial;
+		border-image: initial;
 		color: black;
 		font-size: 18px;
 		background: white;
 		padding: 1em;
+	}
+
+	dialog::backdrop {
+    background: linear-gradient(90deg, rgb(20%, 40%, 60%), rgb(60%, 20%, 40%));
+    mix-blend-mode: darken;
 	}
 </style>
 
@@ -83,9 +96,13 @@
 		
 	</div>
 	<dialog id="edit-dialog">
-		<label for="edicion">Nuevo Valor</label>
-		<input type="text" name="edicion"/>
-		<button>Editar</button>
+		<p id="identificador"></p>
+		<form method="dialog">
+	        <p>Enter new value:</p>
+	        <input type="text" name="new-data" id="update-data-input"/>
+	        <button type="submit" value="cancel">Cancel</button>
+	        <button type="submit" value="confirm">Confirm</button>
+	    </form>
 	</dialog>
 </body>
 </html>

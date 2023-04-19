@@ -133,6 +133,7 @@ function showPlayerData(player){
 	}
 	else {
 		document.getElementById("player-info").innerHTML = "";
+		document.getElementById("identificador").innerHTML = player;
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
@@ -143,20 +144,20 @@ function showPlayerData(player){
 				const foto = crearNodo("img",{src:"https://cdn.nba.com/headshots/nba/latest/260x190/"+stats[0].nba_id+".png",
 										onerror:"imgError(this)"});
 				fotoName.appendChild(foto);
-				const nombre = crearNodo("h3",{onclick:"editarCelda(this)"});
+				const nombre = crearNodo("h3",{id:"Nombre",onclick:"editarCelda(this)"});
 				nombre.innerHTML = stats[0].Nombre;
 				fotoName.appendChild(nombre);
 
 				//POSICION ALTURA PESO Y PROCEDENCIA EN OTRO DIV
 				const datosBasicos = crearNodo("div",{id:"data-player"});
 				const posicion = document.createElement("div");
-				posicion.innerHTML = "<span>Position</span><p onclick='editarCelda(this)'>"+fullNamePosition(stats[0].Posicion)+"</p>";
+				posicion.innerHTML = "<span>Position</span><p id='Posicion' onclick='editarCelda(this)'>"+fullNamePosition(stats[0].Posicion)+"</p>";
 				const altura = document.createElement("div");
-				altura.innerHTML = "<span>Height</span><p onclick='editarCelda(this)'>"+stats[0].Altura+"<sup>\"</sup></p>";
+				altura.innerHTML = "<span>Height</span><p id='Altura' onclick='editarCelda(this)'>"+stats[0].Altura+"<sup>''</sup></p>";
 				const peso = document.createElement("div");
-				peso.innerHTML = "<span>Weight</span><p onclick='editarCelda(this)'>"+stats[0].Peso+"<sub>lb</sub></p>";
+				peso.innerHTML = "<span>Weight</span><p id='Peso' onclick='editarCelda(this)'>"+stats[0].Peso+"<sub>lb</sub></p>";
 				const procedencia = document.createElement("div");
-				procedencia.innerHTML = "<span>Origin</span><p onclick='editarCelda(this)'>"+stats[0].Procedencia+"</p>";
+				procedencia.innerHTML = "<span>Origin</span><p id='Procedencia' onclick='editarCelda(this)'>"+stats[0].Procedencia+"</p>";
 				datosBasicos.appendChild(posicion);
 				datosBasicos.appendChild(altura);
 				datosBasicos.appendChild(peso);
@@ -164,8 +165,6 @@ function showPlayerData(player){
 
 				document.getElementById("player-info").appendChild(fotoName);
 				document.getElementById("player-info").appendChild(datosBasicos);
-
-				console.log(stats);
 			}
 		};
 		xmlhttp.open("GET","get-player-info.php?player="+player,true);
@@ -208,13 +207,32 @@ function loadSelectors(){
 	for (i = 0; i < select1.childNodes.length; i++){
 		select1.childNodes[i].selected = false;
 	}
-	select1.childNodes[0] = true;
+	select1.childNodes[0].selected = true;
 	for (i = 1; i < select2.childNodes.length; i++){
 		select2.childNodes[i].remove();
 	}
 }
 
-
 function editarCelda(celda){
-	document.getElementById('edit-dialog').show;
+	var dialog = document.getElementById('edit-dialog');
+	dialog.showModal();
+	dialog.addEventListener('close',() => dialogHandler(dialog,celda))
+}
+
+function dialogHandler(dialog,celda){
+	var input = document.getElementById('update-data-input');
+	if (dialog.returnValue=="confirm") {
+		//TO DO Validar el input
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				celda.innerHTML = document.getElementById('update-data-input').value;
+			}
+			else alert('No se han podido realizar los cambios');
+		};
+		xmlhttp.open("GET","update-player.php?id="+document.getElementById('identificador').innerHTML+"&"+celda.id+"="+input.value,true);
+		xmlhttp.send();
+
+	}
+	input.value = "";
 }
