@@ -19,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
 	<script src="scripts/js/nba.js"></script>
+	<script src="scripts/js/player-edit.js"></script>
 	<script src="https://kit.fontawesome.com/616a10072c.js" crossorigin="anonymous"></script>
 </head>
 <style>

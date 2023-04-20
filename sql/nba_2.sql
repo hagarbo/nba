@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `nba`
 --
+DROP DATABASE IF EXISTS nba;
+CREATE DATABASE nba;
+use nba;
 
 DELIMITER $$
 --
