@@ -8,7 +8,7 @@
 	$valido = validar($obj->valor);
 	
 	if ($valido) {
-		require('config.php');
+		require('../../conf/config.php');
 		$conn = new mysqli(DB_HOST,DB_HOST_USERNAME,DB_HOST_PASSWORD,DB_DATABASE);
 		$query= "SELECT codigo FROM jugadores WHERE codigo=?";
 		$stmt = $conn->prepare($query);

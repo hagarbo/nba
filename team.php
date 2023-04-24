@@ -1,5 +1,6 @@
 <?php
-	require("config.php");
+	session_start();
+	require("conf/config.php");
 
 	$conn = new mysqli(DB_HOST,DB_HOST_USERNAME,DB_HOST_PASSWORD,DB_DATABASE);
 	$query= "SELECT Nombre FROM equipos";

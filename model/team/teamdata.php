@@ -1,5 +1,5 @@
 <?php
-	require("config.php");
+	require('../../conf/config.php');
 	if (isset($_GET['team'])) {
 		//Mostramos la página con los datos del equipos
 		$equipo = $_GET['team'];

@@ -10,7 +10,7 @@ function refresh(equipo){
 				document.getElementById("team-frame").innerHTML = this.responseText;
 			}
 		};
-		xmlhttp.open("GET","teamdata.php?team="+equipo,true);
+		xmlhttp.open("GET","model/team/teamdata.php?team="+equipo,true);
 		xmlhttp.send();
 	}
 }
@@ -24,7 +24,7 @@ function playerStats(elementId){
 	};
 	playerId=elementId.replace("player-data-","");
 	playerName=document.getElementById(elementId).getElementsByTagName('h3')[0].innerHTML;
-	xmlhttp.open("GET","playerstats.php?player="+playerId+"&name="+playerName,true);
+	xmlhttp.open("GET","model/player/playerstats.php?player="+playerId+"&name="+playerName,true);
 	xmlhttp.send();
 }
 

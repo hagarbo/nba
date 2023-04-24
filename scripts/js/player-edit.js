@@ -35,7 +35,7 @@ function showPlayers(equipo){
 				}		
 			}
 		};
-		xmlhttp.open("GET","get-players.php?team="+equipo,true);
+		xmlhttp.open("GET","model/player/get-players.php?team="+equipo,true);
 		xmlhttp.send();
 	}
 }
@@ -81,7 +81,7 @@ function showPlayerData(player){
 				document.getElementById("player-info").appendChild(datosBasicos);
 			}
 		};
-		xmlhttp.open("GET","get-player-info.php?player="+player,true);
+		xmlhttp.open("GET","model/player/get-player-info.php?player="+player,true);
 		xmlhttp.send();
 	}
 }
@@ -138,7 +138,7 @@ function dialogHandler(dialog,celda){
 			}
 			else alert('No se han podido realizar los cambios');
 		}
-		xmlhttp.open("POST", "update-player.php");
+		xmlhttp.open("POST", "model/player/update-player.php");
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xmlhttp.send("x=" + body);
 	}

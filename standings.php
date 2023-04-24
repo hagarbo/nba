@@ -1,5 +1,6 @@
 <?php
-	require("config.php");
+	session_start();
+	require("conf/config.php");
 	
 	isset($_GET['season']) ? $season = $_GET['season'] : $season = '07/08';
 

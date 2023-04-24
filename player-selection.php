@@ -1,6 +1,11 @@
 <?php
-	require("config.php");
-
+	session_start();
+	// Check if the user is logged in, if not then redirect him to login page
+	if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+	    header("location: login.php");
+	    exit;
+	}
+	require("conf/config.php");
 	$conn = new mysqli(DB_HOST,DB_HOST_USERNAME,DB_HOST_PASSWORD,DB_DATABASE);
 	$query= "SELECT Nombre FROM equipos";
 	$stmt = $conn->prepare($query);

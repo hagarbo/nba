@@ -1,6 +1,6 @@
 <?php
 	if (isset($_GET['player'])) {
-		require('config.php');
+		require('../../conf/config.php');
 		$id = $_GET['player'];
 		$conn = new mysqli(DB_HOST,DB_HOST_USERNAME,DB_HOST_PASSWORD,DB_DATABASE);
 		$query= "SELECT * FROM jugadores LEFT JOIN estadisticas ON jugadores.codigo=estadisticas.jugador WHERE jugadores.codigo=? ";
