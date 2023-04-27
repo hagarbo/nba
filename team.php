@@ -46,4 +46,24 @@
 </body>
 </html>
 
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var object = document.getElementById(ev.dataTransfer.getData('Text'));
+  var x = ev.layerX - Math.trunc(object.offsetWidth/2);
+  var y = ev.layerY;
+  console.log(x);
+  object.style.top = y+"px";
+  object.style.left = x+"px";
+}
+</script>
+
 <?php $conn->close(); ?>

@@ -20,14 +20,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
     if(empty(trim($_POST["username"]))){
-        $username_err = "Por favor ingrese su usuario.";
+        $username_err = "Please fill your username";
     } else{
         $username = trim($_POST["username"]);
     }
     
     // Check if password is empty
     if(empty(trim($_POST["password"]))){
-        $password_err = "Por favor ingrese su contraseña.";
+        $password_err = "Please fill your password";
     } else{
         $password = trim($_POST["password"]);
     }
@@ -68,15 +68,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             header("location: index.php");
                         } else{
                             // Display an error message if password is not valid
-                            $password_err = "La contraseña que has ingresado no es válida.";
+                            $password_err = "Password not valid";
                         }
                     }
                 } else{
                     // Display an error message if username doesn't exist
-                    $username_err = "No existe cuenta registrada con ese nombre de usuario.";
+                    $username_err = "Username does not exists";
                 }
             } else{
-                echo "Algo salió mal, por favor vuelve a intentarlo.";
+                echo "Something was wrong, please try again";
             }
             mysqli_stmt_close($stmt);
             mysqli_close($conn);
@@ -90,6 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/style.css" title="preferred" type="text/css">
     <style type="text/css">
@@ -100,22 +101,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <?php require_once('parts/header.php');?>
     <div class="wrapper">
         <h2>Login</h2>
-        <p>Por favor, complete sus credenciales para iniciar sesión.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Usuario</label>
+                <label>User</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Contraseña</label>
+                <label>Password</label>
                 <input type="password" name="password" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Ingresar">
+                <input type="submit" class="btn btn-primary" value="Log In">
             </div>
-            <p>¿No tienes una cuenta? <a href="register.php">Regístrate ahora</a>.</p>
+            <p>Doesn't have an account? <a href="register.php">Register Now</a>.</p>
         </form>
     </div>    
 </body>

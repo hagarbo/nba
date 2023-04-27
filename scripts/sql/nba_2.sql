@@ -49,7 +49,14 @@ DELIMITER ;
 --
 -- Estructura de tabla para la tabla `equipos`
 --
-
+CREATE TABLE alineaciones (
+  id UNSIGNED INT AUTO_INCREMENT,
+  equipo VARCHAR(20) NOT NULL,
+  jugador INT(11) NOT NULL,
+  posicion NOT NULL,
+  cordX NOT NULL,
+  cordY NOT NULL,
+  PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=latin1_spanish_ci;
 CREATE TABLE `equipos` (
   `Nombre` varchar(20) NOT NULL,
   `Ciudad` varchar(20) DEFAULT NULL,

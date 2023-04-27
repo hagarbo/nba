@@ -677,37 +677,33 @@ nav{
   margin-left: 40%;
 }
 
-#posicion-1{
+#posicion-1,#posicion-2,#posicion-3,#posicion-4,#posicion-5{
   position: absolute;
+  font-size: 12px;
+  cursor: move;
+}
+
+#posicion-1{
   top: 37%;
   left: 30%;
-  font-size: 12px;
 }
 
 #posicion-2{
-  position: absolute;
   top: 60%;
   left: 27%;
-  font-size: 12px;
 }
 
 #posicion-3{
-  position: absolute;
   top: 21%;
   left: 15%;
-  font-size: 12px;
 }
 
 #posicion-4{
-  position: absolute;
   top: 70%;
   left: 10%;
-  font-size: 12px;
 }
 
 #posicion-5{
-  position: absolute;
   top: 45%;
   left: 6%;
-  font-size: 12px;
 }

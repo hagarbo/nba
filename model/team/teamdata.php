@@ -79,7 +79,7 @@
 	}
 	if ($count%$numColumns!=0) $echores = $echores . "</div></div>";
 	$courtHtml = "<div id='court'>
-					<img src='img/court.jpg'>";
+					<img src='img/court.jpg' ondrop='drop(event)' ondragover='allowDrop(event)'>";
 
 	$pos = ["<div class='pos-icon'><i class='fa-solid fa-user fa-2xl'></i></div><ul>",
 			"<div class='pos-icon'><i class='fa-solid fa-user fa-2xl'></i></div><ul>",
@@ -114,7 +114,7 @@
 	
 	for ($i=0; $i < 5; $i++) {
 		$pos[$i].="</ul>";
-		$courtHtml.= "<div id='posicion-".($i+1)."' class='game-position' onmouseover=onPlayerHover(this.id) onmouseout='onPlayerOut(this.id)'>".$pos[$i]."</div>";
+		$courtHtml.= "<div id='posicion-".($i+1)."' class='game-position' onmouseover=onPlayerHover(this.id) onmouseout='onPlayerOut(this.id)' draggable='true' ondragstart='drag(event)'>".$pos[$i]."</div>";
 	}
 	$courtHtml.="</div>";
 	echo $echores.$courtHtml;
